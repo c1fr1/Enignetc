@@ -24,7 +24,7 @@ private:
 	GLuint iboID;
 	int * indices;
 	int indicesLength;
-	std::vector<VBO> vbos;
+	std::vector<VBO *> vbos;
 	int vertexCount;
 	int vertexPerShape;
 	GLenum drawingMode;

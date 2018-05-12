@@ -5,9 +5,13 @@ std::vector<VBO> masterVBOList = {};
 VBO::VBO(float * info, int vertexCount, short vertexSize) {
 	vecSize = vertexSize;
 	glGenBuffers(1, &id);
+	std::cout << "chicken 0" << std::endl;
 	setInfo(info, vertexCount);
+	std::cout << "chicken 1" << std::endl;
 	masterIndex = masterVBOList.size();
-	masterVBOList.push_back(*this);
+	std::cout << "chicken 2" << std::endl;
+	masterVBOList.emplace_back(*this);
+	std::cout << "chicken 3" << std::endl;
 }
 
 void VBO::setInfo(float * newVal, int vertexCount) {
@@ -43,5 +47,5 @@ VBO::~VBO() {
 		masterVBOList[i].masterIndex -= 1;
 	}
 	glDeleteBuffers(1, &id);
-	delete info;
+	delete [] info;
 }

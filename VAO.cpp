@@ -5,8 +5,8 @@ VAO::VAO(float * vertices, int dim, int * ind, int vertCount, int indl, int vps)
 	indices = ind;
 	vertexCount = vertCount;
 	id = 1;
-	checkGLError();
-	//glGenVertexArrays(1, &id);
+	//checkGLError();
+	glGenVertexArrays(1, &id);
 
 
 	std::cout << "fresh chicken flesh" << std::endl;
@@ -14,9 +14,12 @@ VAO::VAO(float * vertices, int dim, int * ind, int vertCount, int indl, int vps)
 	glBindVertexArray(id);
 	vbos = {};
 	vertexPerShape = vps;
+
 	addVBO(vertices, vertexCount, dim);
+
 	glGenBuffers(GL_ELEMENT_ARRAY_BUFFER, &iboID);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertexPerShape * sizeof(int), indices, GL_STATIC_DRAW);
+
 	if (vertexPerShape == 1) {
 		drawingMode = GL_POINTS;
 	}
@@ -67,18 +70,18 @@ void VAO::render() {
 }
 
 void VAO::addVBO(VBO vbo) {
-	vbos.emplace_back(vbo);
+	vbos.emplace_back(&vbo);
 	glBindVertexArray(id);
 	glVertexAttribPointer(vbos.size(), vbo.getVecSize(), GL_FLOAT, false, 0, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo.getID());
 }
 
 void VAO::addVBO(float * val, int vertexCount, short vertexSize) {
-	VBO vbo = VBO(val, vertexCount, vertexSize);
+	VBO * vbo = new VBO(val, vertexCount, vertexSize);
 	vbos.emplace_back(vbo);
 	glBindVertexArray(id);
-	glVertexAttribPointer(vbos.size(), vbo.getVecSize(), GL_FLOAT, false, 0, 0);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo.getID());
+	glVertexAttribPointer(vbos.size(), vbo ->getVecSize(), GL_FLOAT, false, 0, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo ->getID());
 }
 
 GLuint VAO::getID() {
@@ -94,7 +97,7 @@ int * VAO::getIndices() {
 }
 
 VBO VAO::operator[](int index) {
-	return vbos[index];
+	return * vbos[index];
 }
 
 int VAO::getVertexCount() {
@@ -102,4 +105,8 @@ int VAO::getVertexCount() {
 }
 
 VAO::~VAO() {
+	delete [] indices;
+	for (VBO * pointer : vbos) {
+		delete pointer;
+	}
 }

@@ -2,6 +2,7 @@
 #define WINDOW
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
+#include "EnigUtils.h"
 class Window {
 public:
 	GLFWwindow * window;

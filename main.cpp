@@ -8,23 +8,20 @@ int main(void) {
 	if (!glfwInit()) {
 		return -1;
 	}
-	glewExperimental = GL_TRUE;
-	if (!glewInit()) {
-		return -1;
-	}
-	//masterVBOList = {};
-	
-	std::cout << glewExperimental << std::endl;
-	VAO lilBoxyWoxy = VAO(new float[6] {1, 0, 1, 1, 0, 1}, 2, new int[3] {0, 1, 2}, 3, 3);
 
-	/* Initialize the library */
+	//masterVBOList = {};
+
 	Window mainWindow = Window(60, "hey ekker", 640, 480);
-	/* Loop until the user closes the window */
+
+	glewExperimental = true;
+	glClearColor(1, 0, 0, 1);
+	std::cout << "pizza motherfucker" << std::endl;
+	VAO lilBoxyWoxy = VAO(new float[6]{ 0.1f, 0, 0.1f, 0.1f, 0, 0.1f }, 2, new int[3]{ 0, 1, 2 }, 3, 3);
 	while (!glfwWindowShouldClose(mainWindow.window))
 	{
 		/* Render here */
 		glClear(GL_COLOR_BUFFER_BIT);
-		lilBoxyWoxy.render();
+		//lilBoxyWoxy.render();
 		/* Swap front and back buffers */
 		glfwSwapBuffers(mainWindow.window);
 
