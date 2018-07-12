@@ -4,8 +4,8 @@
 #include <GLFW\glfw3.h>
 #include <iostream>
 
-extern bool glewInited;
 void checkGLError();
 bool tryGlewInit();
+bool tryGLFWInit();
 
-#endif //E__UTILS
+#endif

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -125,17 +125,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EnigHandler.cpp" />
     <ClCompile Include="EnigUtils.cpp" />
+    <ClCompile Include="EnigVAO.cpp" />
+    <ClCompile Include="EnigVBO.cpp" />
+    <ClCompile Include="EnigWindow.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="VAO.cpp" />
-    <ClCompile Include="VBO.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="MainHandler.cpp" />
+    <ClCompile Include="VBOList.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EnigHandler.h" />
     <ClInclude Include="EnigUtils.h" />
-    <ClInclude Include="VAO.h" />
-    <ClInclude Include="VBO.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="EnigVAO.h" />
+    <ClInclude Include="EnigVBO.h" />
+    <ClInclude Include="EnigWindow.h" />
+    <ClInclude Include="MainHandler.h" />
+    <ClInclude Include="VBOList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

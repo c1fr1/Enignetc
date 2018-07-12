@@ -1,7 +1,5 @@
 #include "EnigUtils.h"
 
-bool glewInited = false;
-
 void checkGLError() {
 	GLint error;
 	while (error = glGetError()) {
@@ -9,17 +7,21 @@ void checkGLError() {
 	}
 }
 
-bool tryGlewInit() {//0 glew init failed; 1 glew init succeeded; 2 glew init already done;
-	if (glewInited) {
-		return 2;
-	} else {
-		if (glewInit()) {
-			std::cout << "the chicken flesh is not raw" << std::endl;
-			exit(EXIT_FAILURE);
-			return 0;
-		}else {
-			glewInited = true;
-			return 1;
-		}
+bool tryGlewInit() {//0 glew init succeeded; 1 glew init failed;
+	glewExperimental = true;
+	if (glewInit()) {
+		glfwTerminate();
+		exit(EXIT_FAILURE);
+	}else {
+		return 1;
+	}
+}
+
+bool tryGLFWInit() {
+	if (!glfwInit()) {
+		exit(EXIT_FAILURE);
+	}
+	else {
+		return 1;
 	}
 }
